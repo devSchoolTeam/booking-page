@@ -48,7 +48,7 @@ module.exports = "/*!\n * Bootstrap v4.1.3 (https://getbootstrap.com/)\n * Copyr
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "button:focus {\n  outline: 0;\n  box-shadow: none; }\n\nbutton {\n  border: none;\n  height: 78px;\n  border-radius: 5px; }\n\nbutton:hover {\n    cursor: pointer;\n    transition: background-color 0.2s; }\n\nbutton span {\n    font-family: OpenSans, sans-serif;\n    font-weight: bold;\n    letter-spacing: -1px;\n    text-align: center; }\n\n.book-button {\n  width: 210px;\n  font-size: 24px; }\n"
+module.exports = "button {\n  border: none;\n  height: 78px;\n  border-radius: 5px; }\n  button:hover {\n    cursor: pointer;\n    transition: background-color 0.2s; }\n  button:focus {\n    outline: none; }\n  button span {\n    font-family: OpenSans, sans-serif;\n    font-weight: bold;\n    letter-spacing: -1px;\n    text-align: center; }\n  .book-button {\n  width: 210px;\n  font-size: 24px; }\n"
 
 /***/ }),
 
@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/danil/Documents/booking-room/src/styles.sass */"./src/styles.sass");
-module.exports = __webpack_require__(/*! /home/danil/Documents/booking-room/node_modules/bootstrap/dist/css/bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! D:\booking-room\src\styles.sass */"./src/styles.sass");
+module.exports = __webpack_require__(/*! D:\booking-room\node_modules\bootstrap\dist\css\bootstrap.min.css */"./node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 
 /***/ })

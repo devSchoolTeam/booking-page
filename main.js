@@ -115,7 +115,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<router-outlet class=\"main\"></router-outlet>\n<app-popup></app-popup>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<router-outlet class=\"main\"></router-outlet>\r\n<app-popup (visibilitychange)=\"x($event)\"></app-popup>"
 
 /***/ }),
 
@@ -141,7 +141,6 @@ module.exports = ".main {\n  height: 100%; }\n"
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppComponent", function() { return AppComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_gapi_gapi_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./services/gapi/gapi.service */ "./src/app/services/gapi/gapi.service.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -152,14 +151,12 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 
-
 var AppComponent = /** @class */ (function () {
-    function AppComponent(gapiService) {
-        this.gapiService = gapiService;
-        this.gapiIsLoaded = false;
+    function AppComponent() {
     }
-    AppComponent.prototype.ngOnInit = function () {
-        console.log(1);
+    AppComponent.prototype.ngOnInit = function () { };
+    AppComponent.prototype.x = function (e) {
+        console.log(e);
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -167,7 +164,7 @@ var AppComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./app.component.html */ "./src/app/app.component.html"),
             styles: [__webpack_require__(/*! ./app.component.sass */ "./src/app/app.component.sass")]
         }),
-        __metadata("design:paramtypes", [_services_gapi_gapi_service__WEBPACK_IMPORTED_MODULE_1__["GapiService"]])
+        __metadata("design:paramtypes", [])
     ], AppComponent);
     return AppComponent;
 }());
@@ -201,12 +198,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_booking_page_event_event_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/booking-page/event/event.component */ "./src/app/components/booking-page/event/event.component.ts");
 /* harmony import */ var _components_error_page_error_page_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/error-page/error-page.component */ "./src/app/components/error-page/error-page.component.ts");
 /* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/login/login.component */ "./src/app/components/login/login.component.ts");
+/* harmony import */ var angular_page_visibility__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! angular-page-visibility */ "./node_modules/angular-page-visibility/fesm5/angular-page-visibility.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -244,7 +243,8 @@ var AppModule = /** @class */ (function () {
                 ng_gapi__WEBPACK_IMPORTED_MODULE_9__["GoogleApiModule"].forRoot({
                     provide: ng_gapi__WEBPACK_IMPORTED_MODULE_9__["NG_GAPI_CONFIG"],
                     useValue: gapiClientConfig
-                })
+                }),
+                angular_page_visibility__WEBPACK_IMPORTED_MODULE_15__["AngularPageVisibilityModule"]
             ],
             providers: [_services_gapi_gapi_service__WEBPACK_IMPORTED_MODULE_8__["GapiService"], _shared_resolvers_auth_guard__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]],
             bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -264,7 +264,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper\" (swiperight)=\"swipe()\" (swipeleft)=\"swipe()\">\n  <app-header [currentStatus]=\"currentStatus\"></app-header>\n  <div class=\"content\">\n    <div class=\"container\">\n      <div class=\"row\">\n        <div class=\"events-container col-lg-6\">\n          <div class=\"events\">\n            <app-time-measure></app-time-measure>\n            <app-event *ngIf=\"events\" #child [event]=\"tempEvent\" [ngStyle]=\"{'width': '600px'}\"></app-event>\n          </div>\n        </div>\n        <div class=\"button-container col-lg-6\">\n          <div class=\"button-row-1\">\n            <button class=\"time-buttons\" *ngFor=\"let availableMeetingDuration of availableMeetingDurations\"\n                    (click)=\"selectMeetingDuration(availableMeetingDuration.value)\"\n                    [ngClass]=\"selectedDuration == availableMeetingDuration.value? ' selected-button': null\"\n                    [class]=\"availableMeetingDuration.value>interval.interval || !interval? 'disabled-button' : null\">\n              <span>\n                {{availableMeetingDuration.label}}\n              </span>\n            </button>\n          </div>\n          <div class=\"button-row-2\">\n            <button class=\"cancel-btn\" (click)=\"selectMeetingDuration(0)\"\n                    [ngClass]=\"{'disabled-button':selectedDuration === 0}\">\n              <span>Cancel</span>\n            </button>\n            <div [class]=\"eventIsCreating ? 'disabled-loader-btn' : null\">\n              <button class=\"book-button book-button-addition\" [ngClass]=\"{'disabled-button':selectedDuration===0}\"\n                      (click)=\"createEvent()\">\n                <span *ngIf=\"!eventIsCreating; else loader\">{{currentStatus.bookButtonSecond}}</span>\n              </button>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<ng-template #loader>\n  <div class=\"lds-ring\">\n    <div></div>\n    <div></div>\n    <div></div>\n    <div></div>\n  </div>\n</ng-template>\n"
+module.exports = "<div class=\"wrapper\" (swiperight)=\"swipe()\" (swipeleft)=\"swipe()\">\r\n  <app-header [currentStatus]=\"currentStatus\"></app-header>\r\n  <div class=\"content\">\r\n    <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"events-container col-lg-6\">\r\n          <div class=\"events\">\r\n            <app-time-measure></app-time-measure>\r\n            <app-event *ngIf=\"events\" #child [event]=\"tempEvent\" [ngStyle]=\"{'width': '600px'}\"></app-event>\r\n          </div>\r\n        </div>\r\n        <div class=\"button-container col-lg-6\">\r\n          <div class=\"button-row-1\">\r\n            <button class=\"time-buttons\" *ngFor=\"let availableMeetingDuration of availableMeetingDurations\"\r\n                    (click)=\"selectMeetingDuration(availableMeetingDuration.value)\"\r\n                    [ngClass]=\"selectedDuration == availableMeetingDuration.value? ' selected-button': null\"\r\n                    [class]=\"availableMeetingDuration.value>interval.interval || !interval? 'disabled-button' : null\">\r\n              <span>\r\n                {{availableMeetingDuration.label}}\r\n              </span>\r\n            </button>\r\n          </div>\r\n          <div class=\"button-row-2\">\r\n            <button class=\"cancel-btn\" (click)=\"selectMeetingDuration(0)\"\r\n                    [ngClass]=\"{'disabled-button':selectedDuration === 0}\">\r\n              <span>Cancel</span>\r\n            </button>\r\n            <div [class]=\"eventIsCreating ? 'disabled-loader-btn' : null\">\r\n              <button class=\"book-button book-button-addition\" [ngClass]=\"{'disabled-button':selectedDuration===0}\"\r\n                      (click)=\"createEvent()\">\r\n                <span *ngIf=\"!eventIsCreating; else loader\">{{currentStatus.bookButtonSecond}}</span>\r\n              </button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!--LOADER-->\r\n<ng-template #loader>\r\n  <div class=\"lds-ring\">\r\n    <div></div>\r\n    <div></div>\r\n    <div></div>\r\n    <div></div>\r\n  </div>\r\n</ng-template>\r\n"
 
 /***/ }),
 
@@ -403,7 +403,7 @@ var BookingPageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"event-blocks\">\n  <div *ngFor=\"let block of blocks; let i = index\" [class]=\"'event'\" (click)=\" onEventClick(i)\"\n       [ngStyle]=\"{'height': calculateHeight(block.duration,'height'), 'top':calculateHeight(block.fromStart,'offset')}\">\n    <span class=\"event-status\">{{block.status}}&nbsp;</span>\n    <span class=\"event-time\">{{block.start | date: 'HH:mm'}} - {{block.end | date: 'HH:mm'}}</span>\n    <span class=\"underblock-line\"></span>\n  </div>\n  <span #currentTime class=\"current-time\" *ngIf=\" lineOffset\" [ngStyle]=\"{'top':  lineOffset}\"></span>\n  <div #newEvent *ngIf=\"event\" class=\"newEvent\"\n       [ngStyle]=\"{'height':  calculateHeight(event.duration, 'height'), 'top':calculateHeight(event.timeFromStart,'offset')}\">\n    <span class=\"newEvent-status\">New meeting, &nbsp;</span>\n    <span class=\"newEvent-time\">{{event.start | date: 'HH:mm'}} - {{event.end | date: 'HH:mm'}}\n    </span>\n  </div>\n</div>\n"
+module.exports = "<div class=\"event-blocks\">\r\n  <div *ngFor=\"let block of blocks; let i = index\" [class]=\"'event'\" (click)=\" onEventClick(i)\"\r\n       [ngStyle]=\"{'height': calculateHeight(block.duration,'height'), 'top':calculateHeight(block.fromStart,'offset')}\">\r\n    <span class=\"event-status\">{{block.status}}&nbsp;</span>\r\n    <span class=\"event-time\">{{block.start | date: 'HH:mm'}} - {{block.end | date: 'HH:mm'}}</span>\r\n    <span class=\"underblock-line\"></span>\r\n  </div>\r\n  <span #currentTime class=\"current-time\" *ngIf=\" lineOffset\" [ngStyle]=\"{'top':  lineOffset}\"></span>\r\n  <div #newEvent *ngIf=\"event\" class=\"newEvent\"\r\n       [ngStyle]=\"{'height':  calculateHeight(event.duration, 'height'), 'top':calculateHeight(event.timeFromStart,'offset')}\">\r\n    <span class=\"newEvent-status\">New meeting, &nbsp;</span>\r\n    <span class=\"newEvent-time\">{{event.start | date: 'HH:mm'}} - {{event.end | date: 'HH:mm'}}\r\n    </span>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -428,10 +428,10 @@ module.exports = "::-webkit-scrollbar {\n  display: none; }\n\n.main {\n  displa
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventComponent", function() { return EventComponent; });
-/* harmony import */ var _services_popup_popup_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../services/popup/popup.service */ "./src/app/services/popup/popup.service.ts");
+/* harmony import */ var _services_popup_popup_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../../services/popup/popup.service */ "./src/app/services/popup/popup.service.ts");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_time_time_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../services/time/time.service */ "./src/app/services/time/time.service.ts");
-/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var angular_page_visibility__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! angular-page-visibility */ "./node_modules/angular-page-visibility/fesm5/angular-page-visibility.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -449,7 +449,6 @@ var EventComponent = /** @class */ (function () {
     function EventComponent(timeService, popupService) {
         this.timeService = timeService;
         this.popupService = popupService;
-        this.updateLineTimer = Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["interval"])(60000);
     }
     EventComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -463,17 +462,33 @@ var EventComponent = /** @class */ (function () {
                 _this.blocks = _this.calculateBlocks(events, date);
                 _this.interval = _this.calculateInterval(date);
                 _this.lineOffset = _this.calculateCurrentTimeLine(date);
-            }
-        });
-        this.updateLineTimer.subscribe({
-            next: function () {
-                var date = new Date();
-                _this.calculateCurrentTimeLine(date);
+                _this.calculateMeasure(_this.interval.start, _this.interval.end);
             }
         });
     };
     EventComponent.prototype.ngOnDestroy = function () {
         this.subscription.unsubscribe();
+    };
+    EventComponent.prototype.calculateMeasure = function (startTime, endTime) {
+        var objects = [];
+        while (startTime <= endTime) {
+            if (startTime.getMinutes() !== 0) {
+                objects.push({
+                    time: startTime,
+                    type: 'small',
+                    height: this.calculateHeight(900000)
+                });
+            }
+            else {
+                objects.push({
+                    time: startTime,
+                    type: 'big',
+                    height: this.calculateHeight(900000)
+                });
+            }
+            startTime = new Date(startTime.getTime() + 900000);
+        }
+        this.measure = objects;
     };
     EventComponent.prototype.calculateHeight = function (milliseconds, type) {
         var x = (milliseconds * 100) / this.interval.interval;
@@ -522,7 +537,7 @@ var EventComponent = /** @class */ (function () {
     EventComponent.prototype.calculateCurrentTimeLine = function (currentTime) {
         var currentTimeMilliseconds = currentTime.getTime() -
             new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 9, 0, 0).getTime();
-        return this.calculateHeight(currentTimeMilliseconds, 'offset');
+        return this.calculateHeight(currentTimeMilliseconds, 'height');
     };
     EventComponent.prototype.calculateInterval = function (currentTime) {
         var startTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 9, 0, 0);
@@ -548,6 +563,12 @@ var EventComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('currentTime'),
         __metadata("design:type", Object)
     ], EventComponent.prototype, "currentTime", void 0);
+    __decorate([
+        Object(angular_page_visibility__WEBPACK_IMPORTED_MODULE_3__["OnPageVisible"])(),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], EventComponent.prototype, "scrollToCurrentTime", null);
     EventComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-event',
@@ -571,7 +592,7 @@ var EventComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div\n  class=\"title-container\" [ngStyle]=\"{backgroundColor: currentStatus.backgroundColor}\">\n  <div class=\"center-block\">\n    <h1 class=\"name\">Hall Room</h1>\n  </div>\n</div>\n"
+module.exports = "<div\r\n  class=\"title-container\" [ngStyle]=\"{backgroundColor: currentStatus.backgroundColor}\">\r\n  <div class=\"center-block\">\r\n    <h1 class=\"name\">Hall Room</h1>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -645,7 +666,7 @@ var HeaderComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"error-content\">\n  <img class=\"smile\"\n       src=\"../../../assets/images/sadsmile.jpg\">\n  <h1>LOADING ERROR</h1>\n  <button class=\"return\" (click)='returnToMainPage()'>Try again!</button>\n</div>\n"
+module.exports = "<div class=\"error-content\">\r\n  <img class=\"smile\"\r\n       src=\"../../../assets/images/sadsmile.jpg\">\r\n  <h1>LOADING ERROR</h1>\r\n  <button class=\"return\" (click)='returnToMainPage()'>Try again!</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -717,7 +738,7 @@ var ErrorPageComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div>\n    <h1>Unauthorized</h1>\n  </div>\n  <button class=\"btn btn-success\" (click)=\"onSignIn()\">Sign in</button>\n</div>\n"
+module.exports = "<div class=\"login\">\r\n  <div>\r\n    <h1>Unauthorized</h1>\r\n  </div>\r\n  <button class=\"btn btn-success\" (click)=\"onSignIn()\">Sign in</button>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -728,7 +749,7 @@ module.exports = "<div class=\"container\">\n  <div>\n    <h1>Unauthorized</h1>\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".login {\n  display: flex;\n  align-items: center;\n  flex-direction: column;\n  margin-top: 50px; }\n\n.btn-success {\n  width: 150px;\n  margin-top: 50px; }\n"
 
 /***/ }),
 
@@ -794,7 +815,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"background\" [ngStyle]=\"{'background-color': currentStatus.backgroundColor}\">\n  <div class=\"container\">\n    <div class=\"content\">\n      <div class=\"time-block\">\n        <div *ngIf=\"timerString; else noEvents\">\n          <h1 class=\"timer\">{{timerString}}</h1>\n          <span class=\"status-name\">{{currentStatus.statusLabel}}</span>\n        </div>\n      </div>\n      <div class=\"title-container\">\n        <h1 class=\"name\">Hall Room</h1>\n        <button\n          routerLink=\"/book\"\n          class=\"book-button\"\n          [ngStyle]=\"{color: currentStatus.fontColor}\">\n          <span>\n            {{currentStatus.bookButton}}\n          </span>\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n<ng-template #noEvents>\n  <h1 class=\"noevents\">Available</h1>\n  <span class=\"status-name\">No upcoming events</span>\n</ng-template>\n\n\n"
+module.exports = "<div class=\"background\" [ngStyle]=\"{'background-color': currentStatus.backgroundColor}\">\r\n  <div class=\"container\">\r\n    <div class=\"content\">\r\n      <div class=\"time-block\">\r\n        <div *ngIf=\"timerString; else noEvents\">\r\n          <h1 class=\"timer\">{{timerString}}</h1>\r\n          <span class=\"status-name\">{{currentStatus.statusLabel}}</span>\r\n        </div>\r\n      </div>\r\n      <div class=\"title-container\">\r\n        <h1 class=\"name\">Hall Room</h1>\r\n        <button\r\n          routerLink=\"/book\"\r\n          class=\"book-button\"\r\n          [ngStyle]=\"{color: currentStatus.fontColor}\">\r\n          <span>\r\n            {{currentStatus.bookButton}}\r\n          </span>\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<ng-template #noEvents>\r\n  <h1 class=\"noevents\">Available</h1>\r\n  <span class=\"status-name\">No upcoming events</span>\r\n</ng-template>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -1098,7 +1119,6 @@ var TimeService = /** @class */ (function () {
     };
     // METHODS FOR CALCULATING DATA
     TimeService.prototype.changeStatusByTime = function (events, currentTime) {
-        var startTime = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate(), 8, 0, 0);
         if (events.length > 0) {
             for (var i = 0; i < events.length; i++) {
                 var event_1 = events[i];
@@ -1298,7 +1318,7 @@ var BookingTime = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [class]=\"'block '+ classList\" [ngStyle]=\"{backgroundColor: backgroundColor, height: eventHeight}\">\n  <span [ngStyle]=\"{color: fontColor}\">{{text}}</span>\n</div>\n\n"
+module.exports = "<div [class]=\"'block '+ classList\" [ngStyle]=\"{backgroundColor: backgroundColor, height: eventHeight}\">\r\n  <span [ngStyle]=\"{color: fontColor}\">{{text}}</span>\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1381,7 +1401,7 @@ var EventComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"event\">\n  <h1 class=\"title\">{{event.title}}</h1>\n  <ul>\n    <li>\n      <span class=\"headline\">Creator:</span>\n      {{event.creator}}\n    </li>\n    <li>\n      <span class=\"headline\">Time: </span>\n      <span>{{event.start | date: 'HH:mm'}} -\n      {{event.end | date: 'HH:mm'}}\n      </span>\n    </li>\n    <li>\n      <span class=\"headline\">Description: </span>\n      <span>{{event.description}}</span>\n    </li>\n    <li>\n      <span class=\"headline\">Attendees:</span>\n      <ul>\n        <li *ngFor=\"let attendee of event.attendees\">\n          {{attendee.email}}\n        </li>\n      </ul>\n    </li>\n  </ul>\n</div>\n"
+module.exports = "<div *ngIf=\"event\">\r\n  <h1 class=\"title\">{{event.title}}</h1>\r\n  <ul>\r\n    <li>\r\n      <span class=\"headline\">Creator:</span>\r\n      {{event.creator}}\r\n    </li>\r\n    <li>\r\n      <span class=\"headline\">Time: </span>\r\n      <span>{{event.start | date: 'HH:mm'}} -\r\n      {{event.end | date: 'HH:mm'}}\r\n      </span>\r\n    </li>\r\n    <li>\r\n      <span class=\"headline\">Description: </span>\r\n      <span>{{event.description}}</span>\r\n    </li>\r\n    <li>\r\n      <span class=\"headline\">Attendees:</span> <span *ngIf=\"!event.attendees\"> none</span>\r\n      <ul>\r\n        <li *ngFor=\"let attendee of event.attendees\">\r\n          {{attendee.email}}\r\n        </li>\r\n      </ul>\r\n    </li>\r\n  </ul>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1450,7 +1470,7 @@ var EventInfoComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"popup\" *ngIf=\"popUpState\">\n  <div class=\"modal-window\">\n    <div class=\"event-info\"\n         [ngStyle]=\"{'cursor': events.length > 1 ? 'pointer' : default}\"\n         *ngIf=\"eventId!=undefined\"\n         (swiperight)=\"onSwipeRight()\"\n         (swipeleft)=\"onSwipeLeft()\">\n      <span class=\"close\" (click)=\"onCloseClick()\">&times;</span>\n      <div class=\"modal-content\">\n        <app-event-info [event]=\"events[eventId]\"></app-event-info>\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<div class=\"popup\" *ngIf=\"popUpState\">\r\n  <div class=\"modal-window\">\r\n    <div class=\"event-info\"\r\n         [ngStyle]=\"{'cursor': events.length > 1 ? 'pointer' : default}\"\r\n         *ngIf=\"eventId!=undefined\"\r\n         (swiperight)=\"onSwipeRight()\"\r\n         (swipeleft)=\"onSwipeLeft()\">\r\n      <span class=\"close\" (click)=\"onCloseClick()\">&times;</span>\r\n      <div class=\"modal-content\">\r\n        <app-event-info [event]=\"events[eventId]\"></app-event-info>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1555,7 +1575,7 @@ var PopupComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"measure vertical\">\n  <div\n    *ngFor=\"let time of measure\"\n    [ngStyle]=\"{'height': time.height}\"\n    [class]=\"time.type\"\n  ><span class=\"event-status\">{{time.time | date: 'HH:mm'}}</span>\n    <span class=\"line\"\n          *ngIf=\"time.type == 'big'\"></span>\n  </div>\n</div>\n"
+module.exports = "<div class=\"measure vertical\">\r\n  <div\r\n    *ngFor=\"let time of measure\"\r\n    [ngStyle]=\"{'height': time.height}\"\r\n    [class]=\"time.type\"\r\n  ><span class=\"event-status\">{{time.time | date: 'HH:mm'}}</span>\r\n    <span class=\"line\"\r\n          *ngIf=\"time.type == 'big'\"></span>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1696,8 +1716,8 @@ var TimeMeasureComponent = /** @class */ (function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clientConfig", function() { return clientConfig; });
 var clientConfig = {
-    clientId: '1021277222775-3k2hkvmlbbh2sd8cok5ps4uin4nbsoj3.apps.googleusercontent.com',
-    apiKey: 'AIzaSyCX9rlRKtTdVnl7hmOxfeIZkNreGa1xJ3g',
+    clientId: '881677375382-o3a5d10j96iu7j963ah0q2kqs560lgol.apps.googleusercontent.com',
+    apiKey: 'AIzaSyC5sAcA8u1q6uiK2A-fc6m3gfcg3aaoiuI',
     discoveryDocs: [
         "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"
     ],
@@ -2061,7 +2081,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /home/danil/Documents/booking-room/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! D:\booking-room\src\main.ts */"./src/main.ts");
 
 
 /***/ })
