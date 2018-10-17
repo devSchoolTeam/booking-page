@@ -158,7 +158,9 @@ var AppComponent = /** @class */ (function () {
         this.gapiService = gapiService;
         this.gapiIsLoaded = false;
     }
-    AppComponent.prototype.ngOnInit = function () { };
+    AppComponent.prototype.ngOnInit = function () {
+        console.log(1);
+    };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-root',
